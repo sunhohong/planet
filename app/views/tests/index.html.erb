@@ -1,0 +1,29 @@
+<h1>Listing tests</h1>
+
+<table>
+  <thead>
+    <tr>
+              <th>Title</th>
+              <th>Description</th>
+            <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tests.each do |test| %>
+      <tr>
+                  <td><%= test.title %></td>
+                  <td><%= test.description %></td>
+                <td>
+          <%= link_to 'Show', test, :class=>"btn" %>
+          <%= link_to 'Edit', edit_test_path(test), :class=>"btn" %>
+          <%= link_to 'Destroy', test, confirm: 'Are you sure?', method: :delete, :class=>"btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="actions">
+  <%= link_to 'New Test', new_test_path, :class=>"btn" %>
+</div>

@@ -1,0 +1,10 @@
+<%%= show_for @<%= singular_name %> do |s| %>
+<% attributes.each do |attribute| -%>
+  <%%= s.<%= attribute.reference? ? :association : :attribute %> :<%= attribute.name %> %>
+<% end -%>
+<%% end %>
+
+<div class="actions">
+  <%%= link_to 'Edit', edit_<%= singular_name %>_path(@<%= singular_name %>), :class=>"btn" %>
+  <%%= link_to 'Back', <%= plural_name %>_path, :class=>"btn" %>
+</div>

@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  login: sunho
+  hashed_password: 35c01979d464255e94d1a37d6247bf53273a6f05d630ec792cc9490cd67f446a #123456
+  salt: "701686047353400.1079459611059046"
+  name: 홍선호
+  email: sunho@bluechiz.com
+
+two:
+  login: ohgyun
+  hashed_password: Oh!gYun
+  name: 안오균
+  email: ohgyun@bluechiz.com

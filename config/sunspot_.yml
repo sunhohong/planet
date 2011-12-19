@@ -1,0 +1,20 @@
+production:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: WARNING
+
+development:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: INFO
+    path: /solr/core0/
+    
+
+test:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: WARNING
+    path: /solr/core0/

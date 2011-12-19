@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  parent_code: MyString
+  seq: 1
+  name: MyString
+
+two:
+  code: MyString
+  parent_code: MyString
+  seq: 1
+  name: MyString
