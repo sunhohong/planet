@@ -44,5 +44,8 @@ module Planet
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Set default locale
+    config.i18n.default_locale = :ko
   end
 end
