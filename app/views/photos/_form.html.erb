@@ -1,0 +1,13 @@
+<%= simple_form_for(@photo, :wrapper => :inline) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :description %>
+    <%= f.input :parent %>
+    <%= f.input :data, :as => :file %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<%= simple_form_for(@item, :wrapper => :inline) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :title %>
+    <%= f.input :category %>
+    <%= f.input :price %>
+    <%= f.input :location %>
+    <%= f.input :contact %>
+    <%= f.input :contact_allow %>
+    <%= f.input :shipping_cost %>
+    <%= f.input :shipping_method %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit, :value => t("helpers.submit.next") %>
+  </div>
+<% end %>
