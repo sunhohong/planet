@@ -42,3 +42,5 @@ gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'     
 gem 'show_for'          # for bootstrap 
 gem 'kaminari'          # for pagination
 gem 'sunspot_with_kaminari', '~> 0.1'     # for sunspot & kaminari intergration
+gem 'paperclip', '~> 2.4'         # for image upload
+#gem 'plupload-rails3'   # plupload intergration

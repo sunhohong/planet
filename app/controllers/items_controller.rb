@@ -47,8 +47,10 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
 
     respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+      if @item.valid?
+        @item.next_step
+        @item.save
+        format.html { redirect_to edit_item_path(@item), notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
       else
         format.html { render action: "new" }
@@ -61,15 +63,31 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
+    
+    @item.attributes = params[:item]
+
+    if params[:back_button]
+      @item.previous_step
+      @item.save
+    elsif @item.valid?
+      if @item.last_step?
+        if @item.all_valid?
+          @item.confirmed = true
+          @item.save
+          return respond_to do |format|    # last step && all vaild
+            format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+            format.json { head :ok }
+          end
+        end
+      else
+        @item.next_step
+      end
+      @item.save
+    end
 
     respond_to do |format|
-      if @item.update_attributes(params[:item])
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { head :ok }
-      else
         format.html { render action: "edit" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
     end
   end
 

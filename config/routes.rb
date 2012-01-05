@@ -1,5 +1,7 @@
 Planet::Application.routes.draw do
-  resources :tests
+  resources :photos
+
+  match 'plupload_rails/_plupload_uploader', :controller=>'plupload_rails', :action=>'_plupload_uploader', :as=>'pluploader'
 
   resources :categories, :path => "/adm/category/"
 

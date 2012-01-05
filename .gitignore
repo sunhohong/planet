@@ -13,3 +13,19 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore .DS_Store (on mac) files.
+.DS_Store
+
+# solr files
+/solr/data/*
+/solr/pids/*
+
+app/.DS_Store
+
+solr/data/test/index/segments.gen
+
+solr/data/test/index/segments.gen
+
+solr/data/development/index/segments.gen
+

@@ -46,4 +46,32 @@ class ItemsControllerTest < ActionController::TestCase
 
     assert_redirected_to items_path
   end
+
+  test "should render 'edit' action" do   
+    params = @item.attributes
+    params[:step] = @item.steps[@item.steps.index(@item.steps.last)-1]
+    puts params[:step]
+
+    put :update, id: @item.to_param, item: params
+
+    assert_template :edit
+  end
+
+  test "should update and redirect" do
+    params = @item.attributes
+    params[:step] = @item.steps.last
+
+    put :update, id: @item.to_param, item: params
+
+    assert_redirected_to item_path(assigns(:item))
+  end
+
+  test "should render 'edit' action with back button" do
+    params = @item.attributes
+    params[:step] = @item.steps.last
+
+    put :update, id: @item.to_param, item: params, back_button: true
+
+    assert_template :edit
+  end
 end

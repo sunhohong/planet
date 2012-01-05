@@ -7,3 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= provide_tree ../../../vendor/assets/javascripts/plupload-rails3
+//= provide_tree ../../../vendor/assets/stylesheets/plupload-rails3
+//= provide_tree ../../../vendor/assets/images/plupload-rails3

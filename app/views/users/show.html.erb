@@ -1,25 +1,11 @@
-<p id="notice"><%= notice %></p>
+<%= show_for @user do |s| %>
+  <%= s.attribute :login %>
+  <%= s.attribute :name %>
+  <%= s.attribute :email %>
+  <%= image_tag @user.avatar.url(:thumb) %>
+<% end %>
 
-<p>
-  <b>Login:</b>
-  <%= @user.login %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="actions">
+  <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %> |
+  <%= link_to 'Back', users_path, :class => 'btn' %>
+</div>
