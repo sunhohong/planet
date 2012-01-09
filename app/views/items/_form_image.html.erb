@@ -1,11 +1,11 @@
 <% @photo = Photo.new %>
 
+<%= render "photos/form" %>
+
 <%= simple_form_for(@item, :wrapper => :inline) do |f| %>
   <%= f.error_notification %>
 
   <div class="inputs">
-    <%= plupload(@item, :photos, options={:plupload_container=>'uploader', :pluploader=>false, :field_name=>'item[photos_attributes][][payload]'}) %>
-    <div id="uploader" name="uploader" style="width: 100%;"></div>
   </div>
 
   <div class="actions">

@@ -3,6 +3,9 @@ production:
     hostname: localhost
     port: 8983
     log_level: WARNING
+    file_encoding: UTF-8
+    user_language: ko
+    user_country: KR
 
 development:
   solr:

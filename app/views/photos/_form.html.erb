@@ -1,9 +1,8 @@
-<%= simple_form_for(@photo, :wrapper => :inline) do |f| %>
+<%= simple_form_for(@photo, :url => photos_path(:format => :js), :html => { :multipart => true, :target => 'upload_frame'}, :wrapper => :inline) do |f| %>
   <%= f.error_notification %>
 
   <div class="inputs">
     <%= f.input :description %>
-    <%= f.input :parent %>
     <%= f.input :data, :as => :file %>
   </div>
 
@@ -11,3 +10,5 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+
+<iframe id="upload_frame" name="upload_frame" src="about:blank"></iframe>

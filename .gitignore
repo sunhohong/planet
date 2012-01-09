@@ -21,6 +21,9 @@
 /solr/data/*
 /solr/pids/*
 
+# resource
+/public/system/*
+
 app/.DS_Store
 
 solr/data/test/index/segments.gen
