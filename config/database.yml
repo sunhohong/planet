@@ -30,5 +30,5 @@ production:
   database: planet_test
   pool: 5
   username: root
-  password:
+  password: Se54Trup
   host: 127.0.0.1
