@@ -47,5 +47,11 @@ module Planet
 
     # Set default locale
     config.i18n.default_locale = :ko
+
+    # Set lib load path
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+    # Set API key, path
+    config.interaction_api_naver_key = "2566a03edbc5401496a24c4baa85933c"
   end
 end

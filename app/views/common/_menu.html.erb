@@ -1,3 +1,20 @@
+<h3 class="span3"><%= link_to image_tag('logo.png', :width => '20px', :height => '20px') + "Planet", root_path, :class => 'brand' %></h3>
 <ul class="nav">
-  <li><%= link_to "Home", root_path %></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">카테고리<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="#">디지털</a></li>
+    </ul>
+  </li>
+</ul>
+<%= form_tag search_items_path, :method => :get, :class => 'navbar-search pull-left' do %>
+  <%= text_field_tag :query, params[:query], :class => 'search-query span4', :placeholder => t("common.search") %>
+<% end %>
+<ul class="nav pull-right">
+  <li><%= link_to "물건사기", search_items_path %></li>
+  <li><%= link_to "물건팔기", new_item_path %></li>
+  <li><%= link_to "비교하기", new_item_path %></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">로그인<b class="caret"></b></a>
+  </li>
 </ul>

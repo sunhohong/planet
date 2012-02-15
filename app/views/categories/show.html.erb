@@ -1,25 +1,12 @@
-<p id="notice"><%= notice %></p>
+<%= show_for @category do |s| %>
+  <%= s.attribute :name %>
+  <%= s.attribute :parent_id %>
+  <%= s.attribute :lft %>
+  <%= s.attribute :rgt %>
+  <%= s.attribute :seq %>
+<% end %>
 
-<p>
-  <b>Code:</b>
-  <%= @category.code %>
-</p>
-
-<p>
-  <b>Parent code:</b>
-  <%= @category.parent_code %>
-</p>
-
-<p>
-  <b>Seq:</b>
-  <%= @category.seq %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<div class="form-actions">
+  <%= link_to 'Edit', edit_category_path(@category), :class=>"btn" %>
+  <%= link_to 'Back', categories_path, :class=>"btn" %>
+</div>

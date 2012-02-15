@@ -1,5 +1,11 @@
-<%%= simple_form_for(@<%= singular_table_name %>, :wrapper => :inline) do |f| %>
+<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
   <%%= f.error_notification %>
+  <%% if f.error_notification %%>
+    <div class="alert alert-error fade in">
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <%%= f.error_notification %%>
+    </div>
+  <%% end %%>
 
   <div class="inputs">
   <%- attributes.each do |attribute| -%>
@@ -7,7 +13,7 @@
   <%- end -%>
   </div>
 
-  <div class="actions">
+  <div class="form-actions">
     <%%= f.button :submit %>
   </div>
 <%% end %>

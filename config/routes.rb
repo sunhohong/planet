@@ -1,7 +1,10 @@
 Planet::Application.routes.draw do
-  resources :photos
+  get "autocomplete/location"
+  get "autocomplete/address"
 
-  match 'plupload_rails/_plupload_uploader', :controller=>'plupload_rails', :action=>'_plupload_uploader', :as=>'pluploader'
+  resources :categories
+
+  resources :photos
 
   resources :categories, :path => "/adm/category/"
 

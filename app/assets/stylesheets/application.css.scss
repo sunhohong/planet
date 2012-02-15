@@ -3,8 +3,11 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
+ *= require jquery-ui/ui-lightness
  *= require_tree . 
 */
+@import "bootstrap.css";
+/*@import "bootstrap-responsive.css";*/  /* this file is for responsive layout */
 
 html, body {
   background-color: #eee;
@@ -16,7 +19,7 @@ body {
   text-align: center; /* center align it with the container */
 }
 .container {
-  width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+  width: 940px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
 
 /* The white background content wrapper */
@@ -39,18 +42,6 @@ body {
   margin: -20px -20px 20px;
 }
 
-/* Styles you shouldn't keep as they are for displaying this base example only */
-.content .span10,
-.content .span4 {
-  min-height: 500px;
-}
-/* Give a quick and non-cross-browser friendly divider */
-.content .span4 {
-  margin-left: 0;
-  padding-left: 19px;
-  border-left: 1px solid #eee;
-}
-
 .topbar .btn {
   border: 0;
 }
@@ -67,5 +58,4 @@ body {
   border-color: #FBC7C6;
   display: table;
 }
-
 

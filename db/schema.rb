@@ -11,13 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220223745) do
+ActiveRecord::Schema.define(:version => 20120127150807) do
 
   create_table "categories", :force => true do |t|
-    t.string   "code"
-    t.string   "parent_code"
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "seq"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "field_meta", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "has_values"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "field_values", :force => true do |t|
+    t.integer  "meta_id"
+    t.string   "value"
     t.integer  "seq"
     t.string   "name"
+    t.boolean  "default"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20111220223745) do
     t.text     "description"
     t.string   "represent_image"
     t.integer  "price"
-    t.string   "location"
+    t.integer  "location_id"
     t.string   "contact"
     t.boolean  "contact_allow"
     t.integer  "shipping_cost"
@@ -41,9 +60,34 @@ ActiveRecord::Schema.define(:version => 20111220223745) do
     t.boolean  "confirmed"
   end
 
+  create_table "location_raw", :id => false, :force => true do |t|
+    t.string "code", :limit => 45, :null => false
+    t.string "si",   :limit => 45
+    t.string "gu",   :limit => 45
+    t.string "dong", :limit => 45
+  end
+
+  create_table "location_raw2", :id => false, :force => true do |t|
+    t.string "code", :limit => 45, :null => false
+    t.string "si",   :limit => 45
+    t.string "gu",   :limit => 45
+    t.string "dong", :limit => 45
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "postal_code"
+    t.string   "si"
+    t.string   "gu"
+    t.string   "dong"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "photos", :force => true do |t|
     t.string   "description"
-    t.integer  "parent"
+    t.integer  "attachable_id"
     t.integer  "seq"
     t.string   "data_file_name"
     t.string   "data_content_type"

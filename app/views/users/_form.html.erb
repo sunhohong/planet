@@ -1,4 +1,4 @@
-<%= simple_form_for(@user, :wrapper => :inline, :html => { :multipart => true }) do |f| %>
+<%= simple_form_for(@user, :html => { :multipart => true }) do |f| %>
   <%= f.error_notification %>
 
   <div class="inputs">
@@ -10,7 +10,7 @@
     <%= f.input :avatar, :as => :file %>
   </div>
 
-  <div class="actions">
+  <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>

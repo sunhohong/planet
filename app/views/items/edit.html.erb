@@ -1,5 +1,3 @@
-<h1>Editing item</h1>
-<%= @item.current_step %>
-<%= render "form_#{@item.current_step}" %>
+<%= render "items/partial/form_#{@item.current_step}" %>
 
 <%= link_to 'Back', items_path %>

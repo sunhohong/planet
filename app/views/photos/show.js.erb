@@ -1,3 +1,9 @@
-<%= @photo.id %>
-<%= @photo.description %>
-<%= @photo.data.url(:thumb) %>
+<% if flash[:error].blank? %>
+<script type="text/javascript">
+parent.icip.addPhoto('<%= @photo.id %>', '<%= @photo.data.url(:thumb) %>');
+</script>
+<% end %>
+
+<% unless flash[:error].blank? %>
+  <%= content_tag :div, flash[:error] %>
+<% end %>

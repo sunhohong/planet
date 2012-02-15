@@ -1,59 +1,21 @@
-<h1>Listing items</h1>
+<style>
+  /* order 박스 마진 */
+  .order { margin: 0; }
+  /* 왼쪽 검색 필터 스타일 */
+  .filter_box { padding: 5px; }
+  .filter_box input[type="checkbox"], .filter_box input[type="radio"] { margin-right: 5px; }
+  /* 카테고리 breadcrumb */
+  .left .breadcrumb { padding: 3px 7px; margin-bottom: 3px; }
+  .left .categories { margin-left: 10px }
+  .breadcrumb .label { text-shadow: 0 0px 0 white; }
+</style>
 
-<%= paginate(@items) %>
-
-<%= form_tag search_items_path, :method => :get do %>
-<div>
-  <%= text_field_tag :query, params[:query] %> <%= submit_tag "Search!", :class => "btn" %>
+<div class="row">
+  <%= render :partial => 'left' %>
+  
+  <div class="span9">
+    <%= render 'items/partial/search'%>
+  
+    <%= render 'items/partial/list'%>
+  </div>
 </div>
-<% end %>
-
-<div id="facets">
-  <% unless @facet.nil? %>
-    <% @facet.each do |f| %>
-      <span><%= f.value %> : <%= f.count %></span>
-    <% end %>
-  <% end %>
-</div>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Category</th>
-    <th>Description</th>
-    <th>Represent image</th>
-    <th>Price</th>
-    <th>Location</th>
-    <th>Contact</th>
-    <th>Contact allow</th>
-    <th>Shipping cost</th>
-    <th>Shipping method</th>
-    <th>Deleted</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% (@items.respond_to?('results') ? @items.results : @items).each do |item| %>
-  <tr>
-    <td><%= item.title %></td>
-    <td><%= item.category %></td>
-    <td><%= item.description  %></td>
-    <td><%= item.represent_image %></td>
-    <td><%= item.price %></td>
-    <td><%= item.location %></td>
-    <td><%= item.contact %></td>
-    <td><%= item.contact_allow %></td>
-    <td><%= item.shipping_cost %></td>
-    <td><%= item.shipping_method %></td>
-    <td><%= item.deleted %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Item', new_item_path %>

@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  code: MyString
-  parent_code: MyString
-  seq: 1
+  id: 1
   name: MyString
+  parent_id: 1
+  lft: 1
+  rgt: 1
+  seq: 1
 
 two:
-  code: MyString
-  parent_code: MyString
-  seq: 1
+  id: 2
   name: MyString
+  parent_id: 1
+  lft: 1
+  rgt: 1
+  seq: 1

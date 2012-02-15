@@ -1,29 +1,35 @@
 <h1>Listing categories</h1>
 
 <table>
-  <tr>
-    <th>Code</th>
-    <th>Parent code</th>
-    <th>Seq</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+              <th>Name</th>
+              <th>Parent</th>
+              <th>Lft</th>
+              <th>Rgt</th>
+              <th>Seq</th>
+            <th>Actions</th>
+    </tr>
+  </thead>
 
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.code %></td>
-    <td><%= category.parent_code %></td>
-    <td><%= category.seq %></td>
-    <td><%= category.name %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+                  <td><%= category.name %></td>
+                  <td><%= category.parent_id %></td>
+                  <td><%= category.lft %></td>
+                  <td><%= category.rgt %></td>
+                  <td><%= category.seq %></td>
+                <td>
+          <%= link_to 'Show', category, :class=>"btn" %>
+          <%= link_to 'Edit', edit_category_path(category), :class=>"btn" %>
+          <%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete, :class=>"btn" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Category', new_category_path %>
+<div class="form-actions">
+  <%= link_to 'New Category', new_category_path, :class=>"btn" %>
+</div>

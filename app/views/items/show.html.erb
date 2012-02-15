@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span9">
+    <div class="row">
+      <ul class="thumbnails span2">
+      <% @item.photos.each do |p| %>
+        <li><a href="#" class="thumbnail"><%= image_tag(p.data.url(:thumb)) %></a></li>
+      <% end %>
+      </ul>
+      <div class="span7">
+        <%= image_tag(@item.represent.data.url) if @item.represent %>
+      </div>
+    </div>
+  </div>
+  <div class="span3">info</div>
+</div>
 
 <p>
   <b>Title:</b>
@@ -7,7 +21,7 @@
 
 <p>
   <b>Category:</b>
-  <%= @item.category %>
+  <%= @item.category.try(:name) %>
 </p>
 
 <p>
@@ -19,7 +33,7 @@
   <b>Represent image:</b>
   <%= @item.represent_image %>
 </p>
-
+<%= image_tag(@item.represent.data.url(:thumb)) if @item.represent %>
 <p>
   <b>Price:</b>
   <%= @item.price %>

@@ -1,0 +1,19 @@
+//# Place all the behaviors and hooks related to the matching controller here.
+//# All this logic will automatically be available in application.js.
+//# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+<% url = Planet::Application.routes.url_helpers %>
+
+function initLocationAutocomplete(labelElement, valueElement) {
+  $("input#location_autocomplete").autocomplete({
+    source: '<%= url.autocomplete_location_path %>',
+    minLength: 2,
+    select: function(event, ui) {
+      event.preventDefault();
+      labelElement.val(ui.item.label);
+      valueElement.val(ui.item.value);
+    },
+    focus: function(event, ui) {
+      event.preventDefault();
+    }
+  });
+}

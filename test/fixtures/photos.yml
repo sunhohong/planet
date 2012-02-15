@@ -2,8 +2,8 @@
 
 one:
   description: MyString
-  parent: 1
+  attachable_id: 1
 
 two:
   description: MyString
-  parent: 1
+  attachable_id: 1
