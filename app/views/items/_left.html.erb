@@ -1,0 +1,43 @@
+<div class="span3 left">
+  <%= form_tag search_items_path, :method => :get do %>
+    <%= hidden_field_tag :query, params[:query] %>
+    <%= hidden_field_tag :category, params[:category] %>
+    <%= hidden_field_tag :order, params[:order] %>
+    <%= hidden_field_tag :current_location_id, params[:current_location_id] %>
+
+    <%= render :partial => 'items/partial/left_categories' %>
+
+    <div align="right">
+      아래 조건으로
+      <%= button_tag (content_tag(:i, '', :class => "icon-refresh icon-white") + " 다시 검색"), :type => 'submit', :class => 'btn btn-primary' %>
+    </div>
+    <hr>
+    <h3>기간</h3>
+    <ul class="filter_box well unstyled">
+      <% @period_options.each do |i| %>
+      <li><%= radio_button_tag 'period', i.value, params[:period] == i.value %><%= link_to i.name, url_for( self.params.merge(:period => i.value) ) %></li>
+      <% end %>
+    </ul>
+    <hr>
+    <h3><%= t "simple_form.labels.item.price" %></h3>
+    <ul class="filter_box well unstyled">
+      <li><%= check_box_tag :price, 10000, params[:price] %><%= link_to "~만원", url_for( self.params.merge(:price => 10000) ) %></li>
+      <li><%= check_box_tag :price, 100000 %>만원 ~ 십만원</li>
+      <li><%= check_box_tag :price, 1000000 %>십만원 ~ 백만원</li>
+    </ul>
+    <hr>
+    <h3><%= t "simple_form.labels.item.shipping_method" %></h3>
+    <ul class="filter_box well unstyled">
+      <% @shipping_method_options.each do |l| %>
+      <li><%= check_box_tag 'shipping_method[]', l.value, params[:shipping_method].try(:include?, l.value) %><%= link_to l.name, url_for( self.params.merge(:shipping_method => l.value) ) %></li>
+      <% end %>
+    </ul>
+    <hr>
+    <h3><%= t "simple_form.labels.item.location" %></h3>
+    <ul class="filter_box well unstyled">
+      <% @location_options.each do |l| %>
+      <li><%= check_box_tag 'location_si[]', l.value, params[:location_si].try(:include?, l.value) %><%= link_to l.name, url_for( self.params.merge('location_si[]' => l.value) ) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

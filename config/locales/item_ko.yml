@@ -1,0 +1,21 @@
+ko:
+  simple_form:
+    labels:
+      item:
+        title: 물품명
+        category: 카테고리
+        contact: 연락처
+        location: 지역
+        shipping_method: 거래방법
+        price: 가격
+        shipping_cost: 배송비
+        contact_allow: 연락처 공개
+    hints:
+      item:
+        title: 예) 삼성 갤럭시s2, 제네시스 쿠페 200D 09년식
+        category: 정확한 카테고리가 없을 경우 상위 카테고리를 선택해 주세요. 예) 전자사전 -> 디지털
+        price: 가격은 100원 이상 입력해 주세요! 그 이하는 입력이 되지 않아요!!!
+        location: 동이름을 입력하시면 해당하는 지역을 찾으실 수 있어요! 다른 사람들에게는 시/군/구 까지만 공개되니 안심하시구요~
+        contact: 연락처는 전화번호, 혹은 이메일 주소를 적어주시면 됩니다.
+        shipping_cost: 예상되는 배송비를 적어주세요. 실제와 다소 차이가 있어도 괜찮습니다.
+        shipping_method: 거래 방법을 선택해 주세요~!

@@ -1,0 +1,28 @@
+<%# list%>
+<style type="text/css">
+  /* 테이블 스타일 */
+  .item-list {  }
+  .item-list td.image { width: 100px; }
+  .item-list td.location { width: 50px; }
+  .item-list td.shipping_method { width: 50px; }
+  .item-list td.price { width: 80px; }
+</style>
+<table class="item-list table">
+
+  <% (@items.respond_to?('results') ? @items.results : @items).each do |item| %>
+  <tr>
+    <td class="image"><%= image_tag(item.represent.data.url(:thumb)) if item.represent %></td>
+    <td class="definition">
+      <%= link_to item do %>
+        <h4><%= item.title %></h4>
+        <%= truncate(item.description, :length => 100, :omission => '...')  %>
+      <% end %>
+    </td>
+    <td class="location"><%= item.location.try(:address_sigu).split(' ').join('<br>').html_safe %></td>
+    <td class="shipping_method"><%= item.shipping_method_code_name %></td>
+    <td class="price"><%= item.price %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= paginate(@items) %>

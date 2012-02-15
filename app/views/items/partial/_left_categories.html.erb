@@ -1,0 +1,22 @@
+<h3>카테고리</h3>
+<% unless @category.blank? %>
+<ul class="breadcrumb">
+  <% hierarchy = @category.hierarchy.reverse %>
+  <% hierarchy.each do |c| %>
+  <li>
+    <%= link_to c.name, url_for( self.params.merge(:category => c.id) ) %>
+    <%= '<span class="divider">/</span>'.html_safe unless c == hierarchy.last %>
+    <%= "<span class=\"label label-success\">#{@items.total}</span>".html_safe if c == hierarchy.last  %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+<ul class="categories unstyled">
+  <% @info_categories.each do |c| %>
+    <li>
+      <%= link_to c.name, url_for( self.params.merge(:category => c.id) ) %>
+      <%=  %>
+      <% unless c.facet_count.nil? %><span class="label"><%= c.facet_count %></span><% end %>
+    </li>
+  <% end %>
+</ul>

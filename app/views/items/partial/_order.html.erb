@@ -1,0 +1,93 @@
+<%
+  # TODO - extract to view helper
+%>
+
+<div class="order pagination" style="text-align: right">
+  <ul>
+    <li id="order_location" class="next_page <%= 'active' if self.params[:order] == 'location' %>">
+      <%= link_to "최단거리", url_for( self.params.merge(:order => 'location') ) %>
+    </li>
+    <li class="next_page <%= 'active' if self.params[:order] == 'date_desc' %>">
+      <%= link_to "최근등록", url_for( self.params.merge(:order => 'date_desc') ) %>
+    </li>
+    <li class="next_page <%= 'active' if self.params[:order] == 'date_asc' %>">
+      <%= link_to "등록일", url_for( self.params.merge(:order => 'date_asc') ) %>
+    </li>
+    <li class="next_page <%= 'active' if self.params[:order] == 'price_asc' %>">
+      <%= link_to "낮은가격", url_for( self.params.merge(:order => 'price_asc') ) %>
+    </li>
+    <li class="next_page <%= 'active' if self.params[:order] == 'price_desc' %>">
+      <%= link_to "높은가격", url_for( self.params.merge(:order => 'price_desc') ) %>
+    </li>
+  </ul>
+</div>
+
+<div id="order_location_modal" class="modal hide">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>지역을 설정해 주세요.</h3>
+  </div>
+  <div class="modal-body">
+    <p>지금 계신곳 혹은 기준으로 지정하고자 하는 지역을 설정해 주세요.</p>
+    <p>
+      <strong><span id="order_location_modal_locationname"></span></strong>
+      : 이곳이 맞나요? 틀리면 아래에서 검색해 주세요.
+    </p>
+    <%= text_field_tag :location_autocomplete %>
+    <span class="help-inline">동이름을 입력해 주세요.</span>
+    <%= hidden_field_tag :current_location_id %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary">실행!</a>
+    <a href="#" class="btn">닫기</a>
+  </div>
+</div>
+
+<script>
+  /*
+   *  1. 모달을 띄운다 -> 쿠키에 이미 위치정보가 있는지 확인한다. -> 있으면 해당 위치를 표시한다.
+   *                                                        -> 없으면 2로 간다.
+   *  2. 브라우저에서 현재 위치를 받는다. -> 있으면 위치 정보를 서버로 보내 등록된 가장 가까운 주소를 가져온다. -> 주소를 표시한다.
+   *                                  -> 없으면 그냥 냅둔다. (냅두면 안될듯)
+   *  3. 한번 위치정보를 세팅해 검색한 후에는 그 정보가 쿠키에 저장된다.
+   */
+  $(document).ready(function() {
+    // 위치로 정렬시 모달을 띄우자.
+    $("#order_location").click(function() {
+      $('#order_location_modal').modal('show');
+      initLocation();
+      return false;
+    });
+    // 위치를 입력한 후 버튼을 눌렀을때 정렬을 실행하자.
+    $("#order_location_modal .modal-footer .btn-primary").click(function() {
+      if ($("input#current_location_id").val() == "") return;
+      location.href = mergeUrl($("#order_location a").attr("href"), {current_location_id:$("input#current_location_id").val()});
+    });
+
+    // 위치를 찾을때 사용할 위치 정보 자동완성!
+    initLocationAutocomplete($("input#location_autocomplete"), $("input#current_location_id"));
+  });
+
+  function initLocation() {
+    if (getCookie('current_location_id') && getCookie('current_location_address')) {
+      setDefaultLocation(getCookie('current_location_id'), getCookie('current_location_address'))
+    } else {
+      navigator.geolocation.getCurrentPosition(setGeoLocation);
+    }
+  }
+
+  function setGeoLocation(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    var params = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+    $.getJSON('<%= autocomplete_address_path %>?' + hashToParam(params), function(data) {
+      setDefaultLocation(data.id, data.address)
+    });
+  }
+
+  function setDefaultLocation(id, address) {
+    $("#order_location_modal_locationname").text(address);
+    $("input#current_location_id").val(id);
+  }
+</script>
