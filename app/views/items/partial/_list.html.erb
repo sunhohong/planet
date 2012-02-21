@@ -18,7 +18,7 @@
         <%= truncate(item.description, :length => 100, :omission => '...')  %>
       <% end %>
     </td>
-    <td class="location"><%= item.location.try(:address_sigu).split(' ').join('<br>').html_safe %></td>
+    <td class="location"><%= item.location.try(:address_sigu) { |a| a.split(' ').join('<br>').html_safe } %></td>
     <td class="shipping_method"><%= item.shipping_method_code_name %></td>
     <td class="price"><%= item.price %></td>
   </tr>

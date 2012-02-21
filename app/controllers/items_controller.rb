@@ -169,4 +169,13 @@ class ItemsController < ApplicationController
       format.xml { render :xml => @items }
     end
   end
+
+  def show_contact
+    @item = Item.find(params[:id])
+    
+    respond_to do |format|
+      format.html { render :layout => false } # show_contact.html.erb whitout layout
+      format.json { render json: @item.contact }
+    end  
+  end
 end

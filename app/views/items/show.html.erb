@@ -1,74 +1,71 @@
+<style>
+.item-thumbnails {}
+</style>
+
+<div>
+  <h2><%= @item.title %></h2>
+</div>
+<hr />
 <div class="row">
   <div class="span9">
-    <div class="row">
-      <ul class="thumbnails span2">
+    <div>
+      <%= image_tag(@item.represent.data.url) if @item.represent %>
+    </div>
+    <ul class="item-thumbnails thumbnails">
       <% @item.photos.each do |p| %>
         <li><a href="#" class="thumbnail"><%= image_tag(p.data.url(:thumb)) %></a></li>
       <% end %>
-      </ul>
-      <div class="span7">
-        <%= image_tag(@item.represent.data.url) if @item.represent %>
-      </div>
+    </ul>
+  </div>
+  <div class="span3">
+    <h3>물품 정보</h3><hr />
+    <%= show_for @item do |i| %>
+    <%= i.attribute :price %>
+      <%= i.association :location, :using => :address_sigu %>
+      <%= i.attribute :shipping_method %>
+      <%= i.attribute :shipping_cost %>
+    <% end %>
+    <br />
+    <h3>판매자 정보</h3><hr />
+    <%= show_for @item.user do |i| %>
+      <%= i.attribute :name %>
+      신용도
+    <% end %>
+    <div>
+      <br /><hr />
+      판매자 본인일 경우<br />
+      <%= link_to edit_item_path(@item) , :class => 'btn btn-info' do %>
+        <%= content_tag(:i, '', :class => "icon-pencil icon-white") %>
+        물품수정
+      <% end %>
+      <%= link_to @item , confirm: '정말 삭제 하시겠습니까?', method: :delete, :class => 'btn btn-danger' do %>
+        <%= content_tag(:i, '', :class => "icon-remove icon-white") %>
+        물품삭제
+      <% end %>
+      <br><br>
+      일반 사용자일 경우 <br />
+      <%= link_to '#' , :class => 'btn btn-success' do %>
+        <%= content_tag(:i, '', :class => "icon-envelope icon-white") %>
+        구매신청
+      <% end %>
+      <%= button_tag :class => 'btn btn-info', :id => 'show_contact' do %>
+        <%= content_tag(:i, '', :class => "icon-list-alt icon-white") %>
+        연락처보기
+      <% end %>
     </div>
   </div>
-  <div class="span3">info</div>
+</div>
+<hr />
+<div>
+  <%= @item.description %>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 
-<p>
-  <b>Title:</b>
-  <%= @item.title %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @item.category.try(:name) %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
-
-<p>
-  <b>Represent image:</b>
-  <%= @item.represent_image %>
-</p>
-<%= image_tag(@item.represent.data.url(:thumb)) if @item.represent %>
-<p>
-  <b>Price:</b>
-  <%= @item.price %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @item.location %>
-</p>
-
-<p>
-  <b>Contact:</b>
-  <%= @item.contact %>
-</p>
-
-<p>
-  <b>Contact allow:</b>
-  <%= @item.contact_allow %>
-</p>
-
-<p>
-  <b>Shipping cost:</b>
-  <%= @item.shipping_cost %>
-</p>
-
-<p>
-  <b>Shipping method:</b>
-  <%= @item.shipping_method %>
-</p>
-
-<p>
-  <b>Deleted:</b>
-  <%= @item.deleted %>
-</p>
-
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<script>
+  $(document).ready(function() {
+    jItem.initAttachToMenu($('.item-thumbnails'));
+    $('#show_contact').bind('click', function() {
+      App.loadModal('<%= show_contact_item_path(@item) %>');      
+    })
+  });
+</script>

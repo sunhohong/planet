@@ -12,6 +12,9 @@ Planet::Application.routes.draw do
     collection do
       get :search
     end
+    member do
+      get 'show_contact'
+    end
   end
 
   resources :users

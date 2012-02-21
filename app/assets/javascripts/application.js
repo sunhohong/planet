@@ -10,6 +10,26 @@
 //= require bootstrap.min
 //= require_tree .
 
+/*** Global Function ***/
+var App = {};
+
+App.loadModal = function(url) {
+  var modal = $('#_global_modal');
+  modal.modal('show');
+
+  $.ajax({
+    url: mergeUrl(url, { format: 'html' }),
+    //data: data,
+    dataType: 'html',
+    beforeSend: function(event) {},
+    success: function(data) {
+      modal.empty();
+      modal.append($(data));
+    }
+  });
+}
+
+
 /*
  *  Usage ==
  *    hashToParam({ location : 34, title : "This is a utility function." });
@@ -32,7 +52,7 @@ function hashToParam(hash) {
 function mergeUrl(url, hash) {
   if (!isJson(hash)) return url;
 
-  if (url.indexOf('?')) {
+  if (url.indexOf('?') > 0) {
     $.each(url.split('?')[1].split('&'), function(index, p) {
       param = p.split('=');
       if (!eval('hash.' + param[0]) && param[1]) {
